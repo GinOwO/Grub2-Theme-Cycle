@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Construct the logfile name with datetime
-logfile="/var/log/grub_theme_cycle_logfile_$(date +"%Y-%m-%d_%H-%M-%S").log"
-
+logfile="/var/log/grub_theme_cycle_logfile.log"
+echo "------------------------------------------" > "$logfile"
 log() {
   current_datetime=$(date +"%Y-%m-%d_%H-%M-%S")
   echo "$current_datetime: $1" >> "$logfile"
@@ -113,3 +113,5 @@ done
 log "Finished running"
 
 log "Job Completed"
+
+echo "------------------------------------------" > "$logfile"

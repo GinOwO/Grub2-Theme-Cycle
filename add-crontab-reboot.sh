@@ -15,13 +15,18 @@ fi
 
 mkdir "$script_dir"
 \cp "grub-theme-cycle.sh" "$script_dir/"
-chmod +x "$script_dir/grub-theme-cycle.sh"
-cron_command="$script_dir/grub-theme-cycle.sh"
+chown root:root "$script_dir/grub-theme-cycle.sh"
+chmod 755 "$script_dir/grub-theme-cycle.sh"
+cron_command="@reboot $script_dir/grub-theme-cycle.sh"
 
-(sudo crontab -l ; echo "@reboot $cron_command") | sudo crontab -
+if [[ -z $(sudo crontab -l | grep "$cron_command") ]]; then
+  (sudo crontab -l; echo "$cron_command") | sudo crontab -
 
-if [ $? -eq 0 ]; then
+  if [ $? -eq 0 ]; then
     echo "Cron job added successfully."
-else
+  else
     echo "Failed to add cron job."
+  fi
+else
+  echo "Cronjob already exists"
 fi
