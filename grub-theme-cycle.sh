@@ -58,6 +58,12 @@ if [ ${#folders[@]} -eq 0 ]; then
   log_error "Add some themes first" 4
 fi
 
+new_theme=${folders[$RANDOM % ${#folders[@]}]}
+
+if [[ ! -f "$new_theme/theme.txt" ]]; then
+  log_error "$new_theme does not have a theme.txt directly inside it" 5
+fi
+
 grub_path="/etc/default/grub"
 grub_dir="/boot/grub2"
 grub_theme_dir="$grub_dir/themes/current"
@@ -87,7 +93,6 @@ if [[ ! -z $grub_console_line ]]; then
   log "Removed"
 fi
 
-new_theme=${folders[$RANDOM % ${#folders[@]}]}
 log "Choosing $random_folder"
 
 if [[ -d $grub_theme_dir ]]; then
