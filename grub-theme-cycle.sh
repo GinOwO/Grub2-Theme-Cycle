@@ -114,4 +114,4 @@ log "Finished running"
 
 log "Job Completed"
 
-echo "------------------------------------------" > "$logfile"
+echo "------------------------------------------" >> "$logfile"
