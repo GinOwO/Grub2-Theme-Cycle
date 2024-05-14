@@ -38,7 +38,7 @@ log "Job started"
 
 # Check sudo access
 if [ $EUID -ne 0 ]; then
-    log_error "No root access. Run with sudo" 2
+  log_error "No root access. Run with sudo" 2
 fi
 
 folder_paths=("/boot/grub2" "/boot/grub2/themes")
